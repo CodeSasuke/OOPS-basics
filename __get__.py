@@ -1,0 +1,1 @@
+# What does __get__ have to do with method binding?
