@@ -1,5 +1,7 @@
 # Class Decorators in Python
 
+**Navigation:** [OOP + Python features plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [Python functions plan](../python_functions/learning_plan.md)
+
 ## Why do we need class decorators?
 
 A class decorator solves the same reuse problem as a function decorator, but it receives a class object. It can register a class, add metadata, or modify the class after its definition.

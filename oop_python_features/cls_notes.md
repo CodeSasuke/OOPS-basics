@@ -1,5 +1,7 @@
 # `cls` in Python
 
+**Navigation:** [OOP + Python features plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [Python functions plan](../python_functions/learning_plan.md)
+
 `cls` is the conventional name for the first parameter of a **class method**. It refers to the class itself, just as `self` refers to one particular object.
 
 A class method is created with `@classmethod`:

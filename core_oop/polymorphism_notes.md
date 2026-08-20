@@ -1,5 +1,7 @@
 # Polymorphism in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need polymorphism?
 
 Imagine a program that must make many objects speak. Without polymorphism, the caller may need to know every concrete type:

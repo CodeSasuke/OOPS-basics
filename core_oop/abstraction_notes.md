@@ -1,5 +1,7 @@
 # Abstraction in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need abstraction?
 
 A caller often needs to know what an object can do, not how it does it. A report can ask a shape for its `area()` without knowing whether the shape is a square or a circle.

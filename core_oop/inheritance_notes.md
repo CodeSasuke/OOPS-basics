@@ -1,5 +1,7 @@
 # Inheritance in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need inheritance?
 
 Suppose `Car`, `Truck`, and `Motorcycle` all have a manufacturer and a `start()` operation. Without inheritance, we repeat the same code in every class.

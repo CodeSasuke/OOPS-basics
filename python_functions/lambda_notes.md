@@ -1,5 +1,7 @@
 # Lambda Functions in Python
 
+**Navigation:** [Python functions plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need `lambda`?
 
 Some operations are tiny and used only once, especially when passing behavior to `map`, `sorted`, or another function. Naming every tiny operation can add noise.

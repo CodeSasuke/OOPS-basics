@@ -1,5 +1,7 @@
 # Closures in Python
 
+**Navigation:** [Python functions plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need closures?
 
 Sometimes a function needs a value that should stay private and remembered between the moment it is created and the moment it is called. Passing that value manually every time is repetitive.

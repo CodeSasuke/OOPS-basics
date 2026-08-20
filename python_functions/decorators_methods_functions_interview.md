@@ -1,5 +1,7 @@
 # Interview Question: Decorators and Methods
 
+**Navigation:** [Python functions plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Q1. How do decorators affect functions and methods in Python?
 
 ### Answer:

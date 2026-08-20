@@ -1,5 +1,7 @@
 # Method Resolution Order (MRO) in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## 1. What is MRO?
 
 **Method Resolution Order (MRO)** is the order Python follows when it searches for a method or attribute in a class hierarchy.

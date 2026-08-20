@@ -1,5 +1,7 @@
 # Decorators in Python
 
+**Navigation:** [Python functions plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 A **decorator** is a callable, meaning something Python can call like a function, that receives another function or method and returns a replacement callable. It lets us add behavior without editing the original function body.
 
 Common uses include:

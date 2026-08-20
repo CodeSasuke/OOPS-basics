@@ -1,5 +1,7 @@
 # Encapsulation in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Why do we need encapsulation?
 
 An object should protect its important state and control how that state changes. If every caller can change a bank balance directly, invalid values become easy to create.

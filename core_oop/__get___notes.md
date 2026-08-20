@@ -1,5 +1,7 @@
 # `__get__` and Method Binding in Python
 
+**Navigation:** [Core OOP plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 ## Where this topic belongs
 
 This is an advanced topic in Core OOP. Learn it after:

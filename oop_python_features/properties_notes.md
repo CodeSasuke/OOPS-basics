@@ -1,5 +1,7 @@
 # `property` in Python
 
+**Navigation:** [OOP + Python features plan](learning_plan.md) | [Main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [Python functions plan](../python_functions/learning_plan.md)
+
 ## Why do we need properties?
 
 A plain public attribute is simple, but sometimes reading or changing it needs calculation or validation. Calling `get_fahrenheit()` feels less natural when the value behaves like an attribute.
