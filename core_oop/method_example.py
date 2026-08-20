@@ -21,9 +21,20 @@ class Vehicle:
     def get_info():
         return "This is a simple vehicle information display method."
 
+
+def without_class():
+    make = "Toyota"
+    model = "Innova"
+    year = 2020
+    print(f"Separate values must be kept together: {year} {make} {model}")
+
+
 def main():
     my_car = Vehicle("Toyota", "Innova", 2020) # toyota is argument and arguments are actual
-    print("Without a class, vehicle data and display logic would be separate")
+    print("WITHOUT A CLASS")
+    without_class()
+
+    print("\nWITH A CLASS")
     print(my_car.display_info())
     print(Vehicle.get_info())
     # Vehicle.display_info()

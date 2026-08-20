@@ -10,7 +10,11 @@ def add(a: int, b: int) -> int:
     return a + b
 
 def main():
-    print("Without a function, each caller would repeat the addition logic")
+    print("WITHOUT A FUNCTION")
+    print(5 + 3)
+    print("The addition rule is repeated directly in the caller")
+
+    print("\nWITH A FUNCTION")
     result = add(5, 3)
     print(result)
 

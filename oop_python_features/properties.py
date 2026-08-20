@@ -25,8 +25,21 @@ class Temperature:
         self._celsius = value
 
 
+def without_property():
+    class UnsafeTemperature:
+        def __init__(self, celsius: float):
+            self.celsius = celsius
+
+    temperature = UnsafeTemperature(25)
+    temperature.celsius = -300
+    print(f"Invalid value is accepted: {temperature.celsius} C")
+
+
 def main():
-    print("Without a setter, temperature.celsius = -300 would be accepted")
+    print("WITHOUT A PROPERTY")
+    without_property()
+
+    print("\nWITH A PROPERTY")
     temperature = Temperature(25)
     print(f"Celsius: {temperature.celsius}")
     print(f"Fahrenheit: {temperature.fahrenheit}")

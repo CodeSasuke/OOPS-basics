@@ -41,8 +41,17 @@ class OnlineStudent(Student):
 	pass
 
 
+def hard_coded_factory(text: str):
+	name, course = text.split(",")
+	return Student(name.strip(), course.strip())
+
+
 def main():
-	print("Without cls, a factory would be tied to Student")
+	print("WITHOUT CLS")
+	hard_coded = hard_coded_factory("Mina, Data Structures")
+	print(f"Hard-coded factory returned: {type(hard_coded).__name__}")
+
+	print("\nWITH CLS")
 	first = Student("Asha", "Python")
 	second = Student.from_text("Ravi, Object-Oriented Programming")
 

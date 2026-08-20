@@ -8,9 +8,24 @@ transforming, selecting, and combining values.
 from functools import reduce
 
 
+def without_functional_tools(numbers):
+    doubled = []
+    evens = []
+    total = 0
+    for number in numbers:
+        doubled.append(number * 2)
+        if number % 2 == 0:
+            evens.append(number)
+        total += number
+    return doubled, evens, total
+
+
 def main():
-    print("Without functional tools, three separate loops would be needed")
     numbers = [1, 2, 3, 4, 5]
+    print("WITHOUT FUNCTIONAL TOOLS")
+    print(without_functional_tools(numbers))
+
+    print("\nWITH FUNCTIONAL TOOLS")
     doubled = list(map(lambda number: number * 2, numbers))
     evens = list(filter(lambda number: number % 2 == 0, numbers))
     total = reduce(lambda running_total, number: running_total + number, numbers, 0)

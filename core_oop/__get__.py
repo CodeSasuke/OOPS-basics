@@ -45,7 +45,7 @@ def normal_binding_example():
 	"""Show the problem: class and instance calls need different forms."""
 	greeter = Greeter("Asha")
 
-	print("Normal Python method behavior:")
+	print("Without a custom descriptor, the caller must understand both forms:")
 	print(greeter.greet("Hello"))
 	print(Greeter.greet(greeter, "Hello again"))
 

@@ -7,6 +7,14 @@ property.
 """
 
 
+class UnsafeBankAccount:
+    """A deliberately unsafe version that exposes its state directly."""
+
+    def __init__(self, owner: str, balance: float = 0):
+        self.owner = owner
+        self.balance = balance
+
+
 class BankAccount:
     def __init__(self, owner: str, opening_balance: float = 0):
         self.owner = owner
@@ -33,7 +41,13 @@ class BankAccount:
 
 
 def main():
-    print("Without encapsulation, account.balance = -500 bypasses validation")
+    print("WITHOUT ENCAPSULATION")
+    unsafe_account = UnsafeBankAccount("Asha", 100)
+    unsafe_account.balance += 50
+    unsafe_account.balance -= 250
+    print(f"Anyone can create an invalid balance: {unsafe_account.balance}")
+
+    print("\nWITH ENCAPSULATION")
     account = BankAccount("Asha", 100)
     account.deposit(50)
     account.withdraw(25)

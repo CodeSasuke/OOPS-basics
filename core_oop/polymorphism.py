@@ -25,8 +25,22 @@ def make_speak(thing):
     print(f"{type(thing).__name__}: {thing.speak()}")
 
 
+def make_speak_without_polymorphism(thing):
+    if isinstance(thing, Dog):
+        return "Dog: Bark"
+    if isinstance(thing, Cat):
+        return "Cat: Meow"
+    if isinstance(thing, Robot):
+        return "Robot: Beep"
+    return "Unknown sound"
+
+
 def main():
-    print("Without polymorphism, the caller would check every concrete type")
+    print("WITHOUT POLYMORPHISM")
+    for thing in (Dog(), Cat(), Robot()):
+        print(make_speak_without_polymorphism(thing))
+
+    print("\nWITH POLYMORPHISM")
     for thing in (Dog(), Cat(), Robot()):
         make_speak(thing)
 

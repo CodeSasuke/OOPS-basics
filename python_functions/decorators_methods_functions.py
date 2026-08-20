@@ -8,6 +8,12 @@ wrapped callable's metadata.
 
 from functools import wraps
 
+
+def add_without_decorator(a, b):
+    print("Calling: add_without_decorator")
+    return a + b
+
+
 def log_calls(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -54,7 +60,11 @@ class UserManager:
 
 
 def main():
-    print("Without decorators, logging and checks would be repeated manually")
+    print("WITHOUT A DECORATOR")
+    print(add_without_decorator(2, 3))
+    print("The logging statement must be copied into every function")
+
+    print("\nWITH A DECORATOR")
     print(add(2, 3))
     print(obj.multiply(4, 5))
     UserManager.delete_user("alice")

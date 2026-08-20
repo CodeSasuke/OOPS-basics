@@ -17,7 +17,10 @@ class House:
         print(f"The name of the owner is {name}")
 
 def client():
-    print("Without a static method, a House object would be required first")
+    print("WITHOUT A STATIC METHOD")
+    print("A utility function would live outside House or need an object")
+
+    print("\nWITH A STATIC METHOD")
     # my_house = House(5, "123 Main St")
     # my_house.display_name()
     # dhanushya_house = House(3, "456 Elm St")

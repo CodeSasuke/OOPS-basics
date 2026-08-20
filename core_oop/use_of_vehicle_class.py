@@ -9,7 +9,10 @@ import method_example
 
 
 def main():
-    print("Without reuse, this client would rebuild Vehicle and display_info()")
+    print("WITHOUT REUSE")
+    print("The client would need to duplicate Vehicle's data and methods")
+
+    print("\nWITH REUSE")
     my_car = method_example.Vehicle("Honda", "Civic", 2022)
     print("This is my car:")
     print(my_car.make)

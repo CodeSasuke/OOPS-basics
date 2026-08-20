@@ -20,7 +20,10 @@ class Dog(Animal):
 
 
 dog = Dog()
-print("Without MRO, Dog.speak() would be ambiguous between Dog and Animal")
+print("WITHOUT MRO RULES")
+print("A child and parent both define speak(); Python needs a lookup order")
+
+print("\nWITH MRO")
 dog.speak()  # Dog is checked before Animal.
 print(Dog.mro())
 

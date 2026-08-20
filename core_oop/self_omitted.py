@@ -16,7 +16,13 @@ class Animal:
 
 def main():
     my_animal = Animal("Dog")
-    print("Without self, Animal.speak() cannot know which name to use")
+    print("WITHOUT SELF")
+    try:
+        Animal.speak()
+    except TypeError as error:
+        print(f"Python cannot call the method: {error}")
+
+    print("\nWITH SELF")
     print(my_animal.speak())
 
     # Python supplies my_animal as self in this call.

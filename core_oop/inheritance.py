@@ -24,8 +24,40 @@ class ElectricCar(Car):
         return f"{self.make} electric car charges"
 
 
+def without_inheritance():
+    class CarWithoutParent:
+        def __init__(self, make: str):
+            self.make = make
+
+        def start(self):
+            return f"{self.make} vehicle starts"
+
+        def drive(self):
+            return f"{self.make} car drives"
+
+    class ElectricCarWithoutParent:
+        def __init__(self, make: str):
+            self.make = make
+
+        def start(self):
+            return f"{self.make} vehicle starts"
+
+        def drive(self):
+            return f"{self.make} car drives"
+
+        def charge(self):
+            return f"{self.make} electric car charges"
+
+    car = ElectricCarWithoutParent("Tesla")
+    print(car.start())
+    print("The same start() and drive() code had to be copied")
+
+
 def main():
-    print("Without inheritance, Car and ElectricCar would duplicate start()")
+    print("WITHOUT INHERITANCE")
+    without_inheritance()
+
+    print("\nWITH INHERITANCE")
     car = Car("Honda")
     electric_car = ElectricCar("Tesla")
 

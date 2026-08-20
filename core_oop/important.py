@@ -6,6 +6,11 @@ stored on a class into a bound method. The descriptor protocol solves this:
 See ``__get__.py`` for the runnable final example.
 """
 
+print("WITHOUT DESCRIPTORS")
+print("A class would need separate logic to attach self to every method call")
+print("\nWITH DESCRIPTORS")
+print("__get__ performs that binding automatically")
+
 # A particularly difficult question is:
 
 # If methods are internally functions stored inside a class, what mechanism automatically supplies self when accessed through an object?

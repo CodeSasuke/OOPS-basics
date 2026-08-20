@@ -13,8 +13,16 @@ def count_up_to(limit):
         number += 1
 
 
+def list_up_to(limit):
+    return list(range(1, limit + 1))
+
+
 def main():
-    print("Without lazy iteration, all values would be built at once")
+    print("WITHOUT A GENERATOR")
+    numbers = list_up_to(3)
+    print(f"All values are created immediately: {numbers}")
+
+    print("\nWITH A GENERATOR")
     numbers = count_up_to(3)
     print(type(numbers).__name__)
     print(next(numbers))

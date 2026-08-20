@@ -34,8 +34,19 @@ class Report:
     pass
 
 
+def register_manually():
+    class ManualReport:
+        pass
+
+    manual_registry = [ManualReport]
+    print([registered.__name__ for registered in manual_registry])
+
+
 def main():
-    print("Without class decorators, metadata and registration would be manual")
+    print("WITHOUT A CLASS DECORATOR")
+    register_manually()
+
+    print("\nWITH A CLASS DECORATOR")
     user = User("Asha")
     print(User.category)
     print(user.describe())

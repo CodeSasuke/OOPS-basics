@@ -13,8 +13,16 @@ def create_multiplier(factor):
     return multiply
 
 
+def multiply_without_closure(number, factor):
+    return number * factor
+
+
 def main():
-    print("Without a closure, multiply() would need its factor every time")
+    print("WITHOUT A CLOSURE")
+    print(multiply_without_closure(5, 2))
+    print("The factor must be passed again for every call")
+
+    print("\nWITH A CLOSURE")
     times_two = create_multiplier(2)
     times_three = create_multiplier(3)
     print(times_two(5))

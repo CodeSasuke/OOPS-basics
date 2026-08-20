@@ -24,7 +24,13 @@ class Student:
 student1 = Student("Dhanushya")
 student2 = Student("Siddhant")
 
-print("Without binding, introduce() would not know which student to use")
+print("WITHOUT BINDING")
+try:
+    Student.introduce()
+except TypeError as error:
+    print(f"The object is missing: {error}")
+
+print("\nWITH BINDING")
 
 # These are bound method calls. Python supplies student1/student2 as self.
 student1.introduce()

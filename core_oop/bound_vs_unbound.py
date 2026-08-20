@@ -17,7 +17,13 @@ class Calculator:
 
 calculator = Calculator()
 
-print("Without automatic binding, calculator.add would need calculator as self")
+print("WITHOUT AUTOMATIC BINDING")
+try:
+    Calculator.add(5)
+except TypeError as error:
+    print(f"Class access without self fails: {error}")
+
+print("\nWITH AUTOMATIC BINDING")
 
 # Accessing add through the object creates a bound method.
 # calculator is already attached as self, so only number is provided.

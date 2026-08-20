@@ -24,6 +24,10 @@ def problem_without_abstraction():
     print(f"Without abstraction, the caller owns the rules: {areas}")
 
 
+def explain_problem():
+    print("Adding a triangle would require another caller-side condition")
+
+
 class Shape(ABC):
     @abstractmethod
     def area(self) -> float:
@@ -51,8 +55,11 @@ class Circle(Shape):
 
 
 def main():
+    print("WITHOUT ABSTRACTION")
     problem_without_abstraction()
+    explain_problem()
 
+    print("\nWITH ABSTRACTION")
     for shape in (Square(4), Circle(2)):
         print(shape.describe())
 

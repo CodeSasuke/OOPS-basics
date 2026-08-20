@@ -6,8 +6,16 @@ expressions close to the call that uses them.
 """
 
 
+def add_without_lambda(first, second):
+    return first + second
+
+
 def main():
-    print("Without lambdas, every tiny callback would need a separate name")
+    print("WITHOUT LAMBDAS")
+    print(add_without_lambda(2, 3))
+    print("A separate named function is needed for a tiny operation")
+
+    print("\nWITH LAMBDAS")
     add = lambda first, second: first + second
     numbers = [1, 2, 3, 4]
     squares = list(map(lambda number: number * number, numbers))
