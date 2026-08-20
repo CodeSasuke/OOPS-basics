@@ -1,5 +1,7 @@
 # OOP + Python Features Learning Plan
 
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [Python functions plan](../python_functions/learning_plan.md)
+
 This folder teaches Python features that connect functions, descriptors, and classes. These topics come after the Core OOP and Python function foundations.
 
 ## Teaching convention
@@ -202,3 +204,5 @@ python3 oop_python_features/class_decorators.py
 - [ ] I can forward method arguments through a decorator.
 - [ ] I can expand a class decorator into `Class = decorator(Class)`.
 - [ ] I can compare methods, static methods, class methods, and properties.
+
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [Python functions plan](../python_functions/learning_plan.md)

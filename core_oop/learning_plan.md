@@ -1,5 +1,7 @@
 # Core OOP Learning Plan
 
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 This folder teaches Python's object-oriented foundations. Follow the order below; each step depends on the mental model built by the previous step.
 
 ## Teaching convention
@@ -268,3 +270,5 @@ bound method with self attached
 - [ ] I can distinguish encapsulation from abstraction.
 - [ ] I can read a simple MRO.
 - [ ] I can explain why `__get__` is involved in method binding.
+
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Python functions plan](../python_functions/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)

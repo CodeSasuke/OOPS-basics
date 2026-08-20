@@ -1,5 +1,7 @@
 # Python Functions Learning Plan
 
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
+
 This folder teaches function behavior independently of OOP. Decorators are included here first because they depend on first-class functions, closures, and flexible arguments.
 
 ## Teaching convention
@@ -209,3 +211,5 @@ next() -> resume -> produce next value -> pause
 - [ ] I can explain decorators as reusable wrappers.
 - [ ] I can explain why `@wraps` preserves metadata.
 - [ ] I can explain how a generator pauses and resumes.
+
+**Navigation:** [Back to main roadmap](../learning_roadmap.md) | [Core OOP plan](../core_oop/learning_plan.md) | [OOP + Python features plan](../oop_python_features/learning_plan.md)
