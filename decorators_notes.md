@@ -35,6 +35,253 @@ def make_louder(function):
 
 The decorator accepts `function` and returns `wrapper`.
 
+## Why are functions objects?
+
+In Python, a function definition creates a function object and binds a name to it. The name is only a reference; the function object is the value stored somewhere in memory.
+
+```python
+def greet():
+    return "Hello"
+
+
+print(greet)       # <function greet at ...>
+print(type(greet)) # <class 'function'>
+```
+
+The exact memory address in the first output changes between runs, but the important part is that `greet` is an object whose type is `function`.
+
+Visual model:
+
+```text
+name                         object in memory
+
+greet  --------------------> function object
+                              - executable code
+                              - name: "greet"
+                              - docstring
+                              - global-variable context
+                              - custom attributes
+```
+
+Python gives functions the same object behavior available to other values. A function can be:
+
+1. assigned to another name
+2. passed as an argument
+3. returned from another function
+4. stored in a list, tuple, or dictionary
+5. given attributes
+6. inspected at runtime
+
+### 1. Assigning a function to another name
+
+Assignment does not copy the function. Both names refer to the same object:
+
+```python
+def greet():
+    return "Hello"
+
+
+say_hello = greet
+
+print(greet is say_hello)  # True
+print(say_hello())         # Hello
+```
+
+The `is` expression checks object identity. Since `greet` and `say_hello` point to the same function object, it returns `True`.
+
+```text
+greet     --+
+           +----> one function object
+say_hello -+
+```
+
+This is why renaming a function reference does not create a new function.
+
+### 2. Passing a function as an argument
+
+Because a function is a value, another function can receive it as a parameter. A function passed this way is often called a **callback** or a **higher-order function argument**.
+
+```python
+def add(first, second):
+    return first + second
+
+
+def run_operation(operation, first, second):
+    return operation(first, second)
+
+
+print(run_operation(add, 2, 3))  # 5
+```
+
+Notice the difference between `add` and `add()`:
+
+```python
+run_operation(add, 2, 3)    # passes the function object
+run_operation(add(2, 3), 2, 3)  # wrong: passes the result 5
+```
+
+Use parentheses when you want to call a function now. Leave them off when you want to pass the function itself.
+
+### 3. Returning a function
+
+A function can create and return another function. The returned function can be called later:
+
+```python
+def create_multiplier(factor):
+    def multiply(number):
+        return number * factor
+    return multiply
+
+
+times_three = create_multiplier(3)
+print(times_three(4))  # 12
+```
+
+Visual:
+
+```text
+create_multiplier(3)
+        |
+        +--> creates multiply(number)
+        |       remembers factor = 3
+        |
+        +--> returns multiply function object
+
+times_three(4) -------> 4 * 3 = 12
+```
+
+The inner function remembers `factor` even after `create_multiplier` has finished. This combination of a function and remembered surrounding values is called a **closure**. Decorators use the same idea: the wrapper remembers the original function.
+
+### 4. Storing functions in collections
+
+Functions can be selected dynamically from a collection:
+
+```python
+def add(first, second):
+    return first + second
+
+
+def multiply(first, second):
+    return first * second
+
+
+operations = {
+    "+": add,
+    "*": multiply,
+}
+
+
+choice = "*"
+print(operations[choice](4, 5))  # 20
+```
+
+This avoids a long `if`/`elif` chain. The dictionary maps symbols to behavior, not just to data.
+
+### 5. Functions can have attributes
+
+Function objects can store custom attributes, although this is less common than using a class:
+
+```python
+def greet():
+    return "Hello"
+
+
+greet.category = "welcome"
+print(greet.category)  # welcome
+```
+
+Decorators sometimes attach metadata such as a route, permission, or retry count to a function. For larger amounts of state, a class or a callable object is usually clearer.
+
+### 6. Functions can be inspected
+
+Functions expose useful metadata:
+
+```python
+def greet(name: str) -> str:
+    """Return a greeting for one person."""
+    return f"Hello, {name}"
+
+
+print(greet.__name__)       # greet
+print(greet.__doc__)        # Return a greeting for one person.
+print(greet.__annotations__)# {'name': <class 'str'>, 'return': <class 'str'>}
+```
+
+The `inspect` module can inspect the signature too:
+
+```python
+from inspect import signature
+
+
+print(signature(greet))  # (name: str) -> str
+```
+
+This metadata is useful for debugging, documentation tools, command frameworks, and testing libraries. `functools.wraps` matters because it copies important metadata from a decorated function to its wrapper.
+
+## Why this matters for decorators
+
+The decorator pattern is possible because functions can travel through the program as values:
+
+```text
+original function
+       |
+       v
+decorator receives it as an argument
+       |
+       v
+decorator creates a wrapper function
+       |
+       v
+decorator returns the wrapper
+       |
+       v
+name now refers to the wrapper
+```
+
+```python
+def log_calls(function):
+    def wrapper(*args, **kwargs):
+        print("Before the call")
+        result = function(*args, **kwargs)
+        print("After the call")
+        return result
+    return wrapper
+
+
+def add(first, second):
+    return first + second
+
+
+add = log_calls(add)
+print(add(2, 3))
+```
+
+Output:
+
+```text
+Before the call
+After the call
+5
+```
+
+The original `add` function is not edited. Its reference is passed into `log_calls`, and the name `add` is rebound to the returned wrapper. That is the central reason decorators can add logging, validation, authentication, caching, or timing around existing behavior.
+
+## Function object versus function call
+
+Keep these two ideas separate:
+
+```python
+add       # the function object; can be passed or stored
+add(2, 3) # calls the function and produces its return value
+```
+
+```text
+add       -> function object
+add(2, 3) -> 5
+```
+
+Many decorator mistakes come from confusing the function object with the result of calling it.
+
 ## Visual: decorator call flow
 
 ```text
