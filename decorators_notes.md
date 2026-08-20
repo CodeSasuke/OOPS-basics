@@ -218,6 +218,271 @@ print(signature(greet))  # (name: str) -> str
 
 This metadata is useful for debugging, documentation tools, command frameworks, and testing libraries. `functools.wraps` matters because it copies important metadata from a decorated function to its wrapper.
 
+## `*args` and `**kwargs`: flexible function arguments
+
+Before writing a general decorator, understand the two special parameter forms used by most wrappers:
+
+- `*args` collects extra **positional arguments** into a tuple.
+- `**kwargs` collects extra **keyword arguments** into a dictionary.
+
+The names `args` and `kwargs` are conventions. The stars are what give them their meaning:
+
+```python
+def show_arguments(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+
+show_arguments(10, 20, 30, name="Asha", course="Python")
+```
+
+Output:
+
+```text
+(10, 20, 30)
+{'name': 'Asha', 'course': 'Python'}
+```
+
+### Positional arguments
+
+Positional arguments are matched by their position:
+
+```python
+def introduce(name, age):
+    print(f"{name} is {age} years old")
+
+
+introduce("Asha", 25)
+```
+
+Here, `"Asha"` goes to `name` because it is first, and `25` goes to `age` because it is second.
+
+If a function has `*args`, any additional positional values are collected into a tuple:
+
+```python
+def show_numbers(first, *args):
+    print(f"first = {first}")
+    print(f"remaining = {args}")
+
+
+show_numbers(10, 20, 30, 40)
+```
+
+Output:
+
+```text
+first = 10
+remaining = (20, 30, 40)
+```
+
+Visual:
+
+```text
+show_numbers(10, 20, 30, 40)
+             |   |   |   |
+             |   +---+---+----> args = (20, 30, 40)
+             +----------------> first = 10
+```
+
+`args` is a tuple, so it keeps the order of the values and can contain zero or more items.
+
+### Keyword arguments
+
+Keyword arguments are passed using parameter names:
+
+```python
+def introduce(name, age):
+    print(f"{name} is {age} years old")
+
+
+introduce(name="Asha", age=25)
+```
+
+If a function has `**kwargs`, extra named values are collected into a dictionary:
+
+```python
+def show_details(**kwargs):
+    print(kwargs)
+
+
+show_details(name="Asha", course="Python", level="beginner")
+```
+
+Output:
+
+```text
+{'name': 'Asha', 'course': 'Python', 'level': 'beginner'}
+```
+
+Visual:
+
+```text
+show_details(name="Asha", course="Python", level="beginner")
+             |             |                 |
+             +-------------+-----------------+----> kwargs dictionary
+                                                      {
+                                                        "name": "Asha",
+                                                        "course": "Python",
+                                                        "level": "beginner"
+                                                      }
+```
+
+`kwargs` is a dictionary, so values are accessed by their names:
+
+```python
+def show_name(**kwargs):
+    print(kwargs["name"])
+
+
+show_name(name="Asha")  # Asha
+```
+
+### Packing: collecting values
+
+When stars appear in a function definition, they **pack** many values into one variable:
+
+```python
+def collect(*args, **kwargs):
+    return args, kwargs
+
+
+positional, named = collect(1, 2, color="blue")
+print(positional)  # (1, 2)
+print(named)       # {'color': 'blue'}
+```
+
+```text
+many positional values  --*args-->   one tuple
+many keyword values     --**kwargs-> one dictionary
+```
+
+### Unpacking: sending values out
+
+The stars also work in a function call. There, they **unpack** a collection into separate arguments.
+
+```python
+def add(first, second, third):
+    return first + second + third
+
+
+numbers = (10, 20, 30)
+print(add(*numbers))  # 60
+```
+
+`add(*numbers)` is equivalent to `add(10, 20, 30)`.
+
+For a dictionary, use `**`:
+
+```python
+def introduce(name, age):
+    return f"{name} is {age} years old"
+
+
+details = {"name": "Asha", "age": 25}
+print(introduce(**details))  # Asha is 25 years old
+```
+
+`introduce(**details)` is equivalent to `introduce(name="Asha", age=25)`.
+
+### Why decorators use both
+
+A decorator should work with many different functions. The decorator does not always know whether the decorated function has zero arguments, two positional arguments, or several keyword arguments.
+
+```python
+def no_arguments():
+    return "done"
+
+
+def one_argument(name):
+    return f"Hello, {name}"
+
+
+def many_arguments(first, second, *, style="short"):
+    return f"{first}, {second} ({style})"
+```
+
+A wrapper written for only one signature is limited:
+
+```python
+def limited_decorator(function):
+    def wrapper(name):
+        return function(name)
+    return wrapper
+```
+
+It may work for `one_argument`, but it cannot safely wrap `no_arguments` or `many_arguments`. A flexible wrapper uses both collectors:
+
+```python
+from functools import wraps
+
+
+def flexible_decorator(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        print(f"Calling {function.__name__}")
+        return function(*args, **kwargs)
+    return wrapper
+```
+
+The wrapper collects the incoming arguments and then unpacks them when calling the original function:
+
+```text
+caller arguments
+       |
+       v
+wrapper(*args, **kwargs)
+       |
+       |-- args: tuple of positional values
+       |-- kwargs: dictionary of named values
+       |
+       v
+function(*args, **kwargs)
+       |
+       v
+original result
+```
+
+This line is the complete forwarding step:
+
+```python
+return function(*args, **kwargs)
+```
+
+It means: “take everything the wrapper received and pass it to the original function in the same form.”
+
+### A complete argument-forwarding example
+
+```python
+from functools import wraps
+
+
+def log_calls(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        print(f"args = {args}")
+        print(f"kwargs = {kwargs}")
+        return function(*args, **kwargs)
+    return wrapper
+
+
+@log_calls
+def build_profile(name, age, *, city="Unknown"):
+    return f"{name}, {age}, {city}"
+
+
+print(build_profile("Asha", 25, city="Pune"))
+```
+
+Output:
+
+```text
+args = ('Asha', 25)
+kwargs = {'city': 'Pune'}
+Asha, 25, Pune
+```
+
+The decorator does not need to know the parameter names or the number of arguments. It simply receives and forwards them.
+
 ## Why this matters for decorators
 
 The decorator pattern is possible because functions can travel through the program as values:
