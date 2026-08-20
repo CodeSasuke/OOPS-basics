@@ -546,7 +546,9 @@ The workspace is organized into three topic folders under `OOPS-basics/`: `core_
 | [method_binding.py](core_oop/method_binding.py) | `self`, bound calls, explicit class calls | Live example | Phase 1, topics 2-3 |
 | [bound_vs_unbound.py](core_oop/bound_vs_unbound.py) | Bound versus class-accessed methods | Live example | Phase 1, topic 3 |
 | [self_omitted.py](core_oop/self_omitted.py) | Automatic and manual `self` binding | Live example | Phase 1, topic 2 |
-| [important.py](core_oop/important.py) | Descriptor and `__get__` question | Placeholder/advanced prompt | After method binding |
+| [__get__.py](core_oop/__get__.py) | Live descriptor and `__get__` method-binding example | Live example | After method binding |
+| [__get___notes.md](core_oop/__get___notes.md) | Detailed descriptor notes, visuals, and Socratic exercises | Notes | After method binding |
+| [important.py](core_oop/important.py) | Descriptor and `__get__` question | Placeholder/advanced prompt | After the `__get__` lesson |
 | [method_resolution_order.py](core_oop/method_resolution_order.py) | Executable MRO examples | Live example | Phase 1, topic 8 |
 | [method_resolution_order.md](core_oop/method_resolution_order.md) | MRO explanations, multiple inheritance, diamond problem | Notes | Phase 1, topic 8 |
 | [tough_questions.txt](core_oop/tough_questions.txt) | Interview revision for functions, methods, binding, inheritance, MRO, and descriptors | Revision bank | After the relevant phases |
