@@ -1,6 +1,6 @@
 # Decorators in Python
 
-A **decorator** is a callable that receives another function or method and returns a replacement callable. It lets us add behavior without editing the original function body.
+A **decorator** is a callable, meaning something Python can call like a function, that receives another function or method and returns a replacement callable. It lets us add behavior without editing the original function body.
 
 Common uses include:
 
@@ -46,6 +46,8 @@ The `@` line does not run the function. It changes which function object the nam
 from functools import wraps
 ```
 
+The wrapper examples use `*args` and `**kwargs` so they can accept any function arguments. `*args` collects positional values into a tuple, and `**kwargs` collects named values into a dictionary. The wrapper sends them back to the original function with `function(*args, **kwargs)`. The full explanation appears later in [the flexible arguments section](#args-and-kwargs-flexible-function-arguments).
+
 When a decorator creates a `wrapper`, the wrapper is a new function object. Without help, Python may show the wrapper's name and documentation instead of the original function's information.
 
 ```python
@@ -65,7 +67,7 @@ print(add.__name__)  # wrapper
 print(add.__doc__)   # None
 ```
 
-This is confusing because the caller thinks `add` is still `add`, but Python is looking at the new `wrapper` object.
+`__name__` and `__doc__` are metadata attributes attached to a function object. `__name__` stores the function's name, and `__doc__` stores its documentation string. This is confusing because the caller thinks `add` is still `add`, but Python is looking at the new `wrapper` object.
 
 Add `@wraps(function)` above the wrapper to copy important information from the original function:
 
@@ -147,14 +149,14 @@ We might copy the same permission code into every function:
 def delete_user(username, current_user):
     print("Checking permissions...")
     if current_user != "admin":
-        raise PermissionError("Only an admin can delete users")
+        raise PermissionError("Only an admin can delete users")  # built-in error for a forbidden operation
     print(f"Deleting user: {username}")
 
 
 def create_user(username, current_user):
     print("Checking permissions...")
     if current_user != "admin":
-        raise PermissionError("Only an admin can create users")
+        raise PermissionError("Only an admin can create users")  # built-in error for a forbidden operation
     print(f"Creating user: {username}")
 ```
 
