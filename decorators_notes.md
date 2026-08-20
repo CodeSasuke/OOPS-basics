@@ -12,6 +12,156 @@ Common uses include:
 - retries
 - registering functions as commands or routes
 
+## Why do we need decorators?
+
+Imagine an application with many functions. Before each function runs, we may want to check login status, permissions, logging, timing, validation, or error handling. These tasks are **cross-cutting concerns**: they are needed around many functions, but they are not the main job of each function.
+
+For example, the main job of this function is to delete a user:
+
+```python
+def delete_user(username):
+    print(f"Deleting user: {username}")
+```
+
+The function should focus on deleting the user. Authentication and logging are separate concerns.
+
+## What happens without decorators?
+
+We might copy the same permission code into every function:
+
+```python
+def delete_user(username, current_user):
+    print("Checking permissions...")
+    if current_user != "admin":
+        raise PermissionError("Only an admin can delete users")
+    print(f"Deleting user: {username}")
+
+
+def create_user(username, current_user):
+    print("Checking permissions...")
+    if current_user != "admin":
+        raise PermissionError("Only an admin can create users")
+    print(f"Creating user: {username}")
+```
+
+This works, but repetition creates problems:
+
+1. **Duplication:** the same permission code appears in many places.
+2. **Maintenance risk:** a fix must be copied into every function.
+3. **Inconsistent behavior:** one function may accidentally check differently.
+4. **Less readable business logic:** the real action is hidden by setup code.
+5. **Harder testing:** permission logic is mixed with user-management logic.
+6. **Poor reusability:** applying the same rule to a new function requires more copying.
+
+```text
+delete_user = permission code + logging code + delete logic
+create_user = permission code + logging code + create logic
+update_user = permission code + logging code + update logic
+
+                 repeated code everywhere
+```
+
+## How does a decorator solve the problem?
+
+Move the repeated behavior into one decorator and keep each function focused on its actual job:
+
+```python
+from functools import wraps
+
+
+def require_admin(function):
+    @wraps(function)
+    def wrapper(username, current_user):
+        print("Checking permissions...")
+        if current_user != "admin":
+            raise PermissionError("Only an admin can perform this action")
+        return function(username)
+    return wrapper
+
+
+@require_admin
+def delete_user(username):
+    print(f"Deleting user: {username}")
+
+
+@require_admin
+def create_user(username):
+    print(f"Creating user: {username}")
+
+
+delete_user("alice", "admin")
+create_user("ravi", "admin")
+```
+
+Output:
+
+```text
+Checking permissions...
+Deleting user: alice
+Checking permissions...
+Creating user: ravi
+```
+
+The permission rule is now written once and reused consistently:
+
+```text
+require_admin decorator
+          |
+          +---- wraps delete_user
+          +---- wraps create_user
+          +---- wraps update_user
+          +---- wraps download
+```
+
+## What changes when we decorate a function?
+
+This:
+
+```python
+@require_admin
+def delete_user(username):
+    print(f"Deleting user: {username}")
+```
+
+means this:
+
+```python
+def delete_user(username):
+    print(f"Deleting user: {username}")
+
+
+delete_user = require_admin(delete_user)
+```
+
+The decorator receives the original function, creates a wrapper, and returns that wrapper. The name `delete_user` then refers to the wrapper.
+
+```text
+Before:
+delete_user -----------------> original delete logic
+
+After:
+delete_user -----------------> wrapper
+                               |
+                               +-- checks permission
+                               +-- calls original delete logic
+```
+
+The caller still calls `delete_user(...)` normally. The extra behavior happens automatically around the original function.
+
+## When should we use decorators?
+
+Decorators are useful when the same independent behavior applies to many functions:
+
+```text
+logging       -> many functions need logs
+authorization -> many functions need access checks
+timing        -> many functions need performance measurements
+validation    -> many functions need input checks
+retry         -> many functions need retry behavior
+```
+
+Use one when the behavior should be reusable, consistent, and easy to add or remove. A decorator may be unnecessary when the behavior is used only once or would make a simple function harder to understand.
+
 ## The core idea
 
 Functions are objects in Python. They can be stored in variables, passed into other functions, and returned from functions.
