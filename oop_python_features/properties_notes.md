@@ -18,7 +18,7 @@ Predict:
 2. What happens when Celsius is set to `-300`?
 3. Why is the public syntax still `temperature.celsius`?
 
-Run `python3 properties.py`.
+Run `python3 oop_python_features/properties.py`.
 
 ## The idea
 

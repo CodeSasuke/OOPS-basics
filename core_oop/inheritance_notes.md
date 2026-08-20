@@ -25,7 +25,7 @@ Before running the example, predict:
 Run:
 
 ```bash
-python3 inheritance.py
+python3 core_oop/inheritance.py
 ```
 
 Expected output:

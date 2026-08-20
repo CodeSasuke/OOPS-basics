@@ -12,7 +12,7 @@ Predict the squares produced by:
 list(map(lambda number: number * number, [1, 2, 3, 4]))
 ```
 
-Run `python3 lambda_functions.py`.
+Run `python3 python_functions/lambda_functions.py`.
 
 ## The syntax
 

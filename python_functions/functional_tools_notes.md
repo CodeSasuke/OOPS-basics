@@ -14,7 +14,7 @@ filter -> keep even numbers
 reduce -> add all numbers
 ```
 
-Run `python3 functional_tools.py`.
+Run `python3 python_functions/functional_tools.py`.
 
 ## The three operations
 

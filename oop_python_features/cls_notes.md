@@ -122,7 +122,7 @@ return cls(name, course)      # respects the class that called the method
 The complete runnable examples are in [cls_.py](cls_.py).
 
 ```bash
-python3 cls_.py
+python3 oop_python_features/cls_.py
 ```
 
 Expected output:

@@ -29,7 +29,7 @@ Question: does `make_speak` need three branches?
 Run:
 
 ```bash
-python3 polymorphism.py
+python3 core_oop/polymorphism.py
 ```
 
 Expected output:

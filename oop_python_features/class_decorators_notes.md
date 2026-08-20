@@ -21,7 +21,7 @@ Predict:
 2. Does it create a User object?
 3. What will `User.category` print?
 
-Run `python3 class_decorators.py`.
+Run `python3 oop_python_features/class_decorators.py`.
 
 ## The syntax
 

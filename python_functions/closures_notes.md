@@ -15,7 +15,7 @@ print(times_two(5))
 
 Where does `times_two` get the value `2` after `create_multiplier` has finished?
 
-Run `python3 closures.py`.
+Run `python3 python_functions/closures.py`.
 
 ## The idea
 

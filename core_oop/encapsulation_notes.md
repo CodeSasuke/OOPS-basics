@@ -21,7 +21,7 @@ Before running [encapsulation.py](encapsulation.py), predict:
 Run:
 
 ```bash
-python3 encapsulation.py
+python3 core_oop/encapsulation.py
 ```
 
 Expected output:
@@ -87,7 +87,7 @@ print(account.balance)
 
 while keeping writes controlled by `deposit()` and `withdraw()`.
 
-`property` is an OOP + Python feature; the example introduces it here because it demonstrates encapsulated read access. Study [properties.py](properties.py) and its future notes for a dedicated lesson.
+`property` is an OOP + Python feature; the example introduces it here because it demonstrates encapsulated read access. Study [properties.py](../oop_python_features/properties.py) and its notes for a dedicated lesson.
 
 ## Common mistakes
 

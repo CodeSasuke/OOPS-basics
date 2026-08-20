@@ -15,7 +15,7 @@ print(next(numbers))
 print(list(numbers))
 ```
 
-Run `python3 generators.py`.
+Run `python3 python_functions/generators.py`.
 
 ## The idea
 

@@ -24,7 +24,7 @@ Before running [abstraction.py](abstraction.py), predict:
 Run:
 
 ```bash
-python3 abstraction.py
+python3 core_oop/abstraction.py
 ```
 
 Expected output:

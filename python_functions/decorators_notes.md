@@ -1233,7 +1233,7 @@ Decorators change behavior around a function. Keep them small, name them clearly
 From this directory:
 
 ```bash
-python3 decorators_methods_functions.py
+python3 python_functions/decorators_methods_functions.py
 ```
 
 The script demonstrates:

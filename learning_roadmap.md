@@ -32,7 +32,7 @@ Before OOP, make sure the learner is comfortable with variables, strings, number
 
 Existing starting point:
 
-- [function_example.py](function_example.py): a minimal function with parameters, a return value, and a call
+- [function_example.py](python_functions/function_example.py): a minimal function with parameters, a return value, and a call
 
 ### Phase 1: Core OOP
 
@@ -54,7 +54,7 @@ Teach these as the main OOP sequence:
 
 **Goal:** Understand that a class is a design/type and an object is a concrete value created from it.
 
-Start with [method_example.py](method_example.py) and [use_of_vehicle_class.py](use_of_vehicle_class.py).
+Start with [method_example.py](core_oop/method_example.py) and [use_of_vehicle_class.py](core_oop/use_of_vehicle_class.py).
 
 ```python
 class Vehicle:
@@ -89,7 +89,7 @@ Teach first:
 
 **Goal:** Understand how each object stores its own data and how methods access that data.
 
-Use [method_binding.py](method_binding.py), then [self_omitted.py](self_omitted.py) as a correction exercise. The current `self_omitted.py` needs repair before it is used: it calls `main()` even though no `main` function exists and creates an object inside the class body.
+Use [method_binding.py](core_oop/method_binding.py), then [self_omitted.py](core_oop/self_omitted.py) as a correction exercise. The repaired example demonstrates automatic and manual `self` binding.
 
 ```python
 class Student:
@@ -120,7 +120,7 @@ self selects which object's name is read.
 
 **Goal:** Explain why `object.method()` works and why `Class.method(object)` is the equivalent explicit form.
 
-Use [bound_vs_unbound.py](bound_vs_unbound.py) and [method_binding.py](method_binding.py). Use [important.py](important.py) as an advanced question, not as the first explanation.
+Use [bound_vs_unbound.py](core_oop/bound_vs_unbound.py) and [method_binding.py](core_oop/method_binding.py). Use [important.py](core_oop/important.py) as an advanced question, not as the first explanation.
 
 ```python
 calculator.add(5)
@@ -142,9 +142,7 @@ Only after the learner understands this should you introduce that functions stor
 
 **Goal:** Explain why an object should control access to its state instead of allowing every caller to change it freely.
 
-Current status: **missing a dedicated live file and notes**.
-
-Implemented: [encapsulation.py](encapsulation.py) and [encapsulation_notes.md](encapsulation_notes.md).
+Implemented: [encapsulation.py](core_oop/encapsulation.py) and [encapsulation_notes.md](core_oop/encapsulation_notes.md).
 
 ```python
 class BankAccount:
@@ -166,9 +164,7 @@ The teaching point is not that Python has strict private fields. Explain that `_
 
 **Goal:** Explain reuse and specialization: a child class receives behavior from a parent class and can add or change behavior.
 
-Current status: **missing a dedicated live file and notes**.
-
-Implemented: [inheritance.py](inheritance.py) and [inheritance_notes.md](inheritance_notes.md).
+Implemented: [inheritance.py](core_oop/inheritance.py) and [inheritance_notes.md](core_oop/inheritance_notes.md).
 
 ```python
 class Animal:
@@ -197,7 +193,7 @@ Animal
 
 **Goal:** Show that different objects can respond to the same method call in different ways.
 
-Implemented: [polymorphism.py](polymorphism.py) and [polymorphism_notes.md](polymorphism_notes.md). The idea also appears briefly in [tough_questions.txt](tough_questions.txt).
+Implemented: [polymorphism.py](core_oop/polymorphism.py) and [polymorphism_notes.md](core_oop/polymorphism_notes.md). The idea also appears briefly in [tough_questions.txt](core_oop/tough_questions.txt).
 
 ```python
 class Dog:
@@ -224,9 +220,7 @@ The caller uses one interface, `speak()`, while the object decides the implement
 
 **Goal:** Explain why callers should depend on required behavior instead of implementation details.
 
-Current status: **missing a dedicated live file and notes**.
-
-Implemented: [abstraction.py](abstraction.py) and [abstraction_notes.md](abstraction_notes.md) using `abc.ABC` and `@abstractmethod`.
+Implemented: [abstraction.py](core_oop/abstraction.py) and [abstraction_notes.md](core_oop/abstraction_notes.md) using `abc.ABC` and `@abstractmethod`.
 
 ```python
 from abc import ABC, abstractmethod
@@ -257,7 +251,7 @@ abstraction   -> expose required behavior, hide implementation details
 
 **Goal:** Explain how Python finds methods through inheritance, especially multiple inheritance.
 
-Teach this after inheritance and overriding. Use [method_resolution_order.md](method_resolution_order.md) and [method_resolution_order.py](method_resolution_order.py).
+Teach this after inheritance and overriding. Use [method_resolution_order.md](core_oop/method_resolution_order.md) and [method_resolution_order.py](core_oop/method_resolution_order.py).
 
 ```text
 Child -> ParentA -> ParentB -> object
@@ -283,7 +277,7 @@ These topics are not inherently OOP. Teach them as Python function concepts befo
 
 **Goal:** Understand that functions are values that can be stored, passed, and returned.
 
-Use [decorators_notes.md](decorators_notes.md), beginning with its function-object section, and [function_example.py](function_example.py).
+Use [decorators_notes.md](python_functions/decorators_notes.md), beginning with its function-object section, and [function_example.py](python_functions/function_example.py).
 
 ```python
 def add(first, second):
@@ -313,15 +307,13 @@ def show(*args, **kwargs):
     print(kwargs)  # dictionary of named values
 ```
 
-This prerequisite is already explained in [decorators_notes.md](decorators_notes.md) and must come before the first general wrapper example.
+This prerequisite is already explained in [decorators_notes.md](python_functions/decorators_notes.md) and must come before the first general wrapper example.
 
 ### 3. Closures
 
 **Goal:** Understand how an inner function remembers values from the surrounding function.
 
-Current status: notes exist in [decorators_notes.md](decorators_notes.md), but a dedicated live file would improve the sequence.
-
-Create next: `closures.py`.
+Implemented: [closures.py](python_functions/closures.py) and [closures_notes.md](python_functions/closures_notes.md).
 
 ```python
 def create_multiplier(factor):
@@ -338,9 +330,7 @@ print(times_three(4))  # 12
 
 **Goal:** Teach small anonymous functions only after normal `def` functions and first-class behavior.
 
-Implemented: [closures.py](closures.py) and [closures_notes.md](closures_notes.md).
-
-Implemented: [lambda_functions.py](lambda_functions.py) and [lambda_notes.md](lambda_notes.md).
+Implemented: [lambda_functions.py](python_functions/lambda_functions.py) and [lambda_notes.md](python_functions/lambda_notes.md).
 
 ```python
 numbers = [1, 2, 3, 4]
@@ -354,9 +344,7 @@ Explain when not to use `lambda`: if the expression needs a name, multiple steps
 
 **Goal:** Explain transforming, selecting, and combining data with functions.
 
-Implemented: [functional_tools.py](functional_tools.py) and [functional_tools_notes.md](functional_tools_notes.md).
-
-Create next: `functional_tools.py` and `functional_tools_notes.md`.
+Implemented: [functional_tools.py](python_functions/functional_tools.py) and [functional_tools_notes.md](python_functions/functional_tools_notes.md).
 
 ```python
 from functools import reduce
@@ -379,7 +367,7 @@ reduce : many items -> one result
 
 **Goal:** Explain how a reusable wrapper solves repeated cross-cutting behavior.
 
-Use [decorators_notes.md](decorators_notes.md) and [decorators_methods_functions.py](decorators_methods_functions.py).
+Use [decorators_notes.md](python_functions/decorators_notes.md) and [decorators_methods_functions.py](python_functions/decorators_methods_functions.py).
 
 Teach in this order:
 
@@ -394,9 +382,7 @@ The notes already cover the motivation, what happens without decorators, `@wraps
 
 **Goal:** Explain lazy production of values with `yield` and why generators can avoid storing all results at once.
 
-Implemented: [generators.py](generators.py) and [generators_notes.md](generators_notes.md).
-
-Create next: `generators.py` and `generators_notes.md`.
+Implemented: [generators.py](python_functions/generators.py) and [generators_notes.md](python_functions/generators_notes.md).
 
 ```python
 def count_up_to(limit):
@@ -435,7 +421,7 @@ Teach these only after the learner knows classes, objects, methods, and the rele
 
 **Prerequisite:** classes, methods, and the difference between a method and an independent function.
 
-Use [static_methods.py](static_methods.py) and [method_example.py](method_example.py).
+Use [static_methods.py](oop_python_features/static_methods.py) and [method_example.py](core_oop/method_example.py).
 
 ```python
 class MathTools:
@@ -453,7 +439,7 @@ Explain that no `self` or `cls` is supplied. The method is grouped inside the cl
 
 **Prerequisite:** classes, `self`, class state, inheritance, and decorators.
 
-Use [cls_.py](cls_.py) and [cls_notes.md](cls_notes.md).
+Use [cls_.py](oop_python_features/cls_.py) and [cls_notes.md](oop_python_features/cls_notes.md).
 
 ```python
 class Student:
@@ -482,9 +468,7 @@ staticmethod    -> neither automatic value
 
 **Prerequisite:** encapsulation, methods, getters/setters, and validation.
 
-Implemented: [properties.py](properties.py) and [properties_notes.md](properties_notes.md).
-
-Create next: `properties.py` and `properties_notes.md`.
+Implemented: [properties.py](oop_python_features/properties.py) and [properties_notes.md](oop_python_features/properties_notes.md).
 
 ```python
 class Temperature:
@@ -506,7 +490,7 @@ Explain that `@property` lets method logic look like attribute access while stil
 
 **Prerequisite:** decorators, method binding, `self`, `classmethod`, and `staticmethod`.
 
-Use [decorators_methods_functions.py](decorators_methods_functions.py), [decorators_notes.md](decorators_notes.md), and [decorators_methods_functions_interview.md](decorators_methods_functions_interview.md).
+Use [decorators_methods_functions.py](python_functions/decorators_methods_functions.py), [decorators_notes.md](python_functions/decorators_notes.md), and [decorators_methods_functions_interview.md](python_functions/decorators_methods_functions_interview.md).
 
 ```python
 class Calculator:
@@ -531,9 +515,7 @@ multiply(calculator, 4, 5)
 
 **Prerequisite:** classes, callable objects, first-class functions, and decorators.
 
-Current status: **missing a dedicated live file and notes**.
-
-Implemented: [class_decorators.py](class_decorators.py) and [class_decorators_notes.md](class_decorators_notes.md).
+Implemented: [class_decorators.py](oop_python_features/class_decorators.py) and [class_decorators_notes.md](oop_python_features/class_decorators_notes.md).
 
 ```python
 def add_label(cls):
@@ -553,39 +535,39 @@ Explain that a class decorator receives a class object and returns the same or a
 
 ## File classification
 
-The folder currently contains one level, `OOPS-basics/`. The files classify as follows.
+The workspace is organized into three topic folders under `OOPS-basics/`: `core_oop/`, `python_functions/`, and `oop_python_features/`. The files classify as follows.
 
 ### Core OOP files
 
 | File | Role | Status | Teach when |
 | --- | --- | --- | --- |
-| [method_example.py](method_example.py) | Classes, objects, `__init__`, instance state, basic method, static method preview | Live example | Phase 1, topics 1-2 |
-| [use_of_vehicle_class.py](use_of_vehicle_class.py) | Importing and using a class from another module | Live example | After classes and objects |
-| [method_binding.py](method_binding.py) | `self`, bound calls, explicit class calls | Live example | Phase 1, topics 2-3 |
-| [bound_vs_unbound.py](bound_vs_unbound.py) | Bound versus class-accessed methods | Live example | Phase 1, topic 3 |
-| [self_omitted.py](self_omitted.py) | Intended `self` omission experiment | Needs repair | Phase 1, topic 2 |
-| [important.py](important.py) | Descriptor and `__get__` question | Placeholder/advanced prompt | After method binding |
-| [method_resolution_order.py](method_resolution_order.py) | Executable MRO examples | Live example | Phase 1, topic 8 |
-| [method_resolution_order.md](method_resolution_order.md) | MRO explanations, multiple inheritance, diamond problem | Notes | Phase 1, topic 8 |
-| [tough_questions.txt](tough_questions.txt) | Interview revision for functions, methods, binding, inheritance, MRO, and descriptors | Revision bank | After the relevant phases |
+| [method_example.py](core_oop/method_example.py) | Classes, objects, `__init__`, instance state, basic method, static method preview | Live example | Phase 1, topics 1-2 |
+| [use_of_vehicle_class.py](core_oop/use_of_vehicle_class.py) | Importing and using a class from another module | Live example | After classes and objects |
+| [method_binding.py](core_oop/method_binding.py) | `self`, bound calls, explicit class calls | Live example | Phase 1, topics 2-3 |
+| [bound_vs_unbound.py](core_oop/bound_vs_unbound.py) | Bound versus class-accessed methods | Live example | Phase 1, topic 3 |
+| [self_omitted.py](core_oop/self_omitted.py) | Automatic and manual `self` binding | Live example | Phase 1, topic 2 |
+| [important.py](core_oop/important.py) | Descriptor and `__get__` question | Placeholder/advanced prompt | After method binding |
+| [method_resolution_order.py](core_oop/method_resolution_order.py) | Executable MRO examples | Live example | Phase 1, topic 8 |
+| [method_resolution_order.md](core_oop/method_resolution_order.md) | MRO explanations, multiple inheritance, diamond problem | Notes | Phase 1, topic 8 |
+| [tough_questions.txt](core_oop/tough_questions.txt) | Interview revision for functions, methods, binding, inheritance, MRO, and descriptors | Revision bank | After the relevant phases |
 
 ### Python function files
 
 | File | Role | Status | Teach when |
 | --- | --- | --- | --- |
-| [function_example.py](function_example.py) | Basic function, parameters, return, call | Live example | Phase 0 |
-| [decorators_methods_functions.py](decorators_methods_functions.py) | Function decorators and method decorators | Live example | Phase 2, topic 6; Phase 3, topic 4 |
-| [decorators_notes.md](decorators_notes.md) | Motivation-first decorator course with function objects, closures, `args/kwargs`, `wraps`, visuals, and mistakes | Notes | Phase 2, topic 6 |
-| [decorators_methods_functions_interview.md](decorators_methods_functions_interview.md) | Short interview revision for decorators and methods | Revision notes | After decorators |
+| [function_example.py](python_functions/function_example.py) | Basic function, parameters, return, call | Live example | Phase 0 |
+| [decorators_methods_functions.py](python_functions/decorators_methods_functions.py) | Function decorators and method decorators | Live example | Phase 2, topic 6; Phase 3, topic 4 |
+| [decorators_notes.md](python_functions/decorators_notes.md) | Motivation-first decorator course with function objects, closures, `args/kwargs`, `wraps`, visuals, and mistakes | Notes | Phase 2, topic 6 |
+| [decorators_methods_functions_interview.md](python_functions/decorators_methods_functions_interview.md) | Short interview revision for decorators and methods | Revision notes | After decorators |
 
 ### OOP + Python feature files
 
 | File | Role | Status | Teach when |
 | --- | --- | --- | --- |
-| [static_methods.py](static_methods.py) | `staticmethod` and class access | Live example | Phase 3, topic 1 |
-| [cls_.py](cls_.py) | `classmethod`, `cls`, alternate constructors, class state, subclass factory | Live example | Phase 3, topic 2 |
-| [cls_notes.md](cls_notes.md) | Detailed `cls` notes and visuals | Notes | Phase 3, topic 2 |
-| [decorators_methods_functions.py](decorators_methods_functions.py) | `@classmethod` and `@staticmethod` combined with a decorator | Bridge example | Phase 3, topic 4 |
+| [static_methods.py](oop_python_features/static_methods.py) | `staticmethod` and class access | Live example | Phase 3, topic 1 |
+| [cls_.py](oop_python_features/cls_.py) | `classmethod`, `cls`, alternate constructors, class state, subclass factory | Live example | Phase 3, topic 2 |
+| [cls_notes.md](oop_python_features/cls_notes.md) | Detailed `cls` notes and visuals | Notes | Phase 3, topic 2 |
+| [decorators_methods_functions.py](python_functions/decorators_methods_functions.py) | `@classmethod` and `@staticmethod` combined with a decorator | Bridge example | Phase 3, topic 4 |
 
 ### Existing supporting material
 
@@ -594,21 +576,21 @@ The folder currently contains one level, `OOPS-basics/`. The files classify as f
 | [.gitignore](.gitignore) | Ignores Python and local generated files | Keep as repository configuration |
 | [learning_roadmap.md](learning_roadmap.md) | This curriculum and file map | Use as the folder index |
 
-## Missing files to create next
+## Implemented curriculum files
 
-Create these in the following order, using the same notes convention:
+These topic pairs are now organized into the subfolders above:
 
 ```text
-1. inheritance.py + inheritance_notes.md
-2. polymorphism.py + polymorphism_notes.md
-3. encapsulation.py + encapsulation_notes.md
-4. abstraction.py + abstraction_notes.md
-5. closures.py + closures_notes.md
-6. lambda_functions.py + lambda_notes.md
-7. functional_tools.py + functional_tools_notes.md
-8. generators.py + generators_notes.md
-9. properties.py + properties_notes.md
-10. class_decorators.py + class_decorators_notes.md
+core_oop/inheritance.py + inheritance_notes.md
+core_oop/polymorphism.py + polymorphism_notes.md
+core_oop/encapsulation.py + encapsulation_notes.md
+core_oop/abstraction.py + abstraction_notes.md
+python_functions/closures.py + closures_notes.md
+python_functions/lambda_functions.py + lambda_notes.md
+python_functions/functional_tools.py + functional_tools_notes.md
+python_functions/generators.py + generators_notes.md
+oop_python_features/properties.py + properties_notes.md
+oop_python_features/class_decorators.py + class_decorators_notes.md
 ```
 
 Every notes file should begin with:
