@@ -3,6 +3,10 @@
 When a method is called through an object, Python automatically passes that
 object as the first argument, usually named ``self``. This is called method
 binding.
+
+Without binding, calling a method through an object would fail because the
+method would not know which object's data to read. The solved calls below
+show both object syntax and explicit class syntax.
 """
 
 
@@ -19,6 +23,8 @@ class Student:
 
 student1 = Student("Dhanushya")
 student2 = Student("Siddhant")
+
+print("Without binding, introduce() would not know which student to use")
 
 # These are bound method calls. Python supplies student1/student2 as self.
 student1.introduce()

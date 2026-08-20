@@ -1,4 +1,9 @@
-"""Live examples of ``cls`` and ``@classmethod`` in Python."""
+"""``cls`` and ``@classmethod``: the problem with hard-coded classes.
+
+Without ``cls``, alternate constructors would need to name ``Student``
+directly and would return the wrong type for subclasses. A class method gets
+the receiving class automatically, so the solution remains reusable.
+"""
 
 
 class Student:
@@ -37,6 +42,7 @@ class OnlineStudent(Student):
 
 
 def main():
+	print("Without cls, a factory would be tied to Student")
 	first = Student("Asha", "Python")
 	second = Student.from_text("Ravi, Object-Oriented Programming")
 

@@ -1,4 +1,10 @@
-"""Live examples for encapsulation and controlled state changes."""
+"""Encapsulation: expose safe operations instead of raw state.
+
+Without encapsulation, callers can change a balance directly and create an
+invalid account. The solution is to keep the balance behind methods that
+validate each operation, then expose only the read-only value through a
+property.
+"""
 
 
 class BankAccount:
@@ -27,6 +33,7 @@ class BankAccount:
 
 
 def main():
+    print("Without encapsulation, account.balance = -500 bypasses validation")
     account = BankAccount("Asha", 100)
     account.deposit(50)
     account.withdraw(25)

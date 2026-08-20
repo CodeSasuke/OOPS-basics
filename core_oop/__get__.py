@@ -42,7 +42,7 @@ class Greeter:
 
 
 def normal_binding_example():
-	"""Show the normal class and instance calls first."""
+	"""Show the problem: class and instance calls need different forms."""
 	greeter = Greeter("Asha")
 
 	print("Normal Python method behavior:")
@@ -51,7 +51,7 @@ def normal_binding_example():
 
 
 def descriptor_example():
-	"""Show the two calls that cause __get__ to run."""
+	"""Show the solution: ``__get__`` controls both access forms."""
 	greeter = Greeter("Ravi")
 
 	print("\nDescriptor behavior:")
@@ -65,6 +65,7 @@ def descriptor_example():
 
 
 def main():
+	print("Without __get__, a function would not adapt to class access")
 	normal_binding_example()
 	descriptor_example()
 

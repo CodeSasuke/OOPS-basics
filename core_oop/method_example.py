@@ -1,3 +1,12 @@
+"""Classes and methods: organize data with behavior.
+
+Without a class, vehicle data and display logic would be separate values and
+functions that callers must keep matched manually. The solution groups the
+data with the methods that use it, while ``@staticmethod`` handles behavior
+that does not need an object.
+"""
+
+
 class Vehicle:
     def __init__(self, make: str, model: str, year: int): # whereas make is a parameter
         self.make = make # the make of the object is stored in the instance variable 'make'
@@ -14,7 +23,7 @@ class Vehicle:
 
 def main():
     my_car = Vehicle("Toyota", "Innova", 2020) # toyota is argument and arguments are actual
-    print(my_car.make)
+    print("Without a class, vehicle data and display logic would be separate")
     print(my_car.display_info())
     print(Vehicle.get_info())
     # Vehicle.display_info()

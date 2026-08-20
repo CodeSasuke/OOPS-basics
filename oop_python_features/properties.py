@@ -1,4 +1,9 @@
-"""Live examples for the property decorator."""
+"""Properties: validate assignment while keeping simple attribute syntax.
+
+Without a property setter, callers could assign an impossible temperature
+directly. The solution validates writes in one place and computes Fahrenheit
+when it is read.
+"""
 
 
 class Temperature:
@@ -21,6 +26,7 @@ class Temperature:
 
 
 def main():
+    print("Without a setter, temperature.celsius = -300 would be accepted")
     temperature = Temperature(25)
     print(f"Celsius: {temperature.celsius}")
     print(f"Fahrenheit: {temperature.fahrenheit}")

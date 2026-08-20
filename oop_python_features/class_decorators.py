@@ -1,4 +1,9 @@
-"""Live examples for class decorators."""
+"""Class decorators: add class behavior without editing each class.
+
+Without a decorator, metadata and registration code would be repeated after
+every class definition. The solution is a callable that receives a class,
+changes or records it, and returns the finished class.
+"""
 
 
 def add_model_metadata(cls):
@@ -30,6 +35,7 @@ class Report:
 
 
 def main():
+    print("Without class decorators, metadata and registration would be manual")
     user = User("Asha")
     print(User.category)
     print(user.describe())

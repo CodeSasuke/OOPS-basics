@@ -3,6 +3,9 @@
 MRO is the order Python follows when looking for a method or attribute in
 an inheritance hierarchy. It is especially important with multiple
 inheritance because more than one parent may define the same method.
+
+Without MRO, multiple inheritance could not decide which ``show`` method to
+run. Python's lookup order and ``super()`` provide one predictable path.
 """
 
 
@@ -17,6 +20,7 @@ class Dog(Animal):
 
 
 dog = Dog()
+print("Without MRO, Dog.speak() would be ambiguous between Dog and Animal")
 dog.speak()  # Dog is checked before Animal.
 print(Dog.mro())
 

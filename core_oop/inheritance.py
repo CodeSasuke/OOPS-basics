@@ -1,4 +1,9 @@
-"""Live examples for inheritance."""
+"""Inheritance: solve repeated behavior by sharing a parent contract.
+
+Without inheritance, every vehicle class would repeat ``make`` storage and
+the ``start`` behavior. The solution is to place common behavior in
+``Vehicle`` and let specialized classes add only what they need.
+"""
 
 
 class Vehicle:
@@ -20,6 +25,7 @@ class ElectricCar(Car):
 
 
 def main():
+    print("Without inheritance, Car and ElectricCar would duplicate start()")
     car = Car("Honda")
     electric_car = ElectricCar("Tesla")
 

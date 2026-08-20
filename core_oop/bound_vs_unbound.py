@@ -5,14 +5,19 @@ Python automatically passes that object as ``self``.
 
 When a method is accessed through the class, it is not connected to an
 object. We must pass the object ourselves as the first argument.
+
+Without binding, every object call would require manually passing the
+instance. Python's descriptor behavior creates a bound method for us.
 """
 
 
 class Calculator:
     def add(self, number):
         return number + 10
-    
+
 calculator = Calculator()
+
+print("Without automatic binding, calculator.add would need calculator as self")
 
 # Accessing add through the object creates a bound method.
 # calculator is already attached as self, so only number is provided.

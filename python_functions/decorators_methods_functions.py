@@ -1,12 +1,12 @@
-# How do decorators affect functions and methods?
-# 31. How do decorators affect functions and methods?
-# Answer: A decorator receives a function and returns a replacement function or object.
-# For methods, the decorator can preserve, change, or remove normal argument binding.
-# Use functools.wraps when writing wrappers to preserve function metadata.
+"""Decorators: add behavior without editing every function.
+
+Without a decorator, logging and permission checks would be copied into each
+function or method. A decorator receives the original callable and returns a
+replacement that adds the shared behavior. ``functools.wraps`` preserves the
+wrapped callable's metadata.
+"""
 
 from functools import wraps
-
-# Decorator example for a normal function
 
 def log_calls(func):
     @wraps(func)
@@ -21,10 +21,6 @@ def add(a, b):
     return a + b
 
 
-print(add(2, 3))
-
-
-# Decorator example for a method
 class Calculator:
     @log_calls
     def multiply(self, a, b):
@@ -32,15 +28,7 @@ class Calculator:
 
 
 obj = Calculator()
-print(obj.multiply(4, 5))
 
-# Explanation:
-# A decorator wraps the original function and returns a new function.
-# For methods, Python automatically passes the instance as the first argument.
-# @wraps keeps the original function metadata like name and docstring intact.
-
-
-# Additional example: decorators with @classmethod, @staticmethod, and logging/auth style
 
 def require_admin(func):
     @wraps(func)
@@ -65,11 +53,13 @@ class UserManager:
         print(f"User {username} logged in")
 
 
-UserManager.delete_user("alice")
-UserManager.login("bob")
+def main():
+    print("Without decorators, logging and checks would be repeated manually")
+    print(add(2, 3))
+    print(obj.multiply(4, 5))
+    UserManager.delete_user("alice")
+    UserManager.login("bob")
 
-# Explanation:
-# - @classmethod makes the first parameter cls instead of self.
-# - @staticmethod does not receive self or cls.
-# - A decorator can be used to add behavior such as permission checks or logging.
-# - In real projects, decorators are often used for authentication, logging, caching, etc.
+
+if __name__ == "__main__":
+    main()

@@ -1,4 +1,9 @@
-"""Live examples for closures."""
+"""Closures: preserve data after the outer function returns.
+
+Without a closure, a multiplier would need a global variable or repeated
+arguments to remember its factor. The solution returns an inner function
+that keeps the needed value in its enclosing scope.
+"""
 
 
 def create_multiplier(factor):
@@ -9,6 +14,7 @@ def create_multiplier(factor):
 
 
 def main():
+    print("Without a closure, multiply() would need its factor every time")
     times_two = create_multiplier(2)
     times_three = create_multiplier(3)
     print(times_two(5))
