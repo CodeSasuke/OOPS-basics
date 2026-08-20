@@ -12,6 +12,120 @@ Common uses include:
 - retries
 - registering functions as commands or routes
 
+## Two pieces of syntax used below
+
+The examples below use two decorator ideas. Learn these first so the code is readable.
+
+### The `@decorator` symbol
+
+When Python sees `@some_decorator` immediately above a function, it sends the function to that decorator and replaces the function name with the returned result.
+
+```python
+@some_decorator
+def work():
+    pass
+```
+
+This is exactly the same as:
+
+```python
+def work():
+    pass
+
+
+work = some_decorator(work)
+```
+
+The `@` line does not run the function. It changes which function object the name refers to. The decorated function is still called later with `work()`.
+
+### What is `@wraps`?
+
+`wraps` is a helper supplied by Python in the `functools` module:
+
+```python
+from functools import wraps
+```
+
+When a decorator creates a `wrapper`, the wrapper is a new function object. Without help, Python may show the wrapper's name and documentation instead of the original function's information.
+
+```python
+def log_calls(function):
+    def wrapper(*args, **kwargs):
+        return function(*args, **kwargs)
+    return wrapper
+
+
+@log_calls
+def add(first, second):
+    """Add two numbers."""
+    return first + second
+
+
+print(add.__name__)  # wrapper
+print(add.__doc__)   # None
+```
+
+This is confusing because the caller thinks `add` is still `add`, but Python is looking at the new `wrapper` object.
+
+Add `@wraps(function)` above the wrapper to copy important information from the original function:
+
+```python
+from functools import wraps
+
+
+def log_calls(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        return function(*args, **kwargs)
+    return wrapper
+
+
+@log_calls
+def add(first, second):
+    """Add two numbers."""
+    return first + second
+
+
+print(add.__name__)  # add
+print(add.__doc__)   # Add two numbers.
+```
+
+`wraps(function)` tells Python: “this wrapper is standing in for `function`, so preserve the original function's identity information.” It preserves commonly used metadata such as:
+
+- `__name__`: the function's name
+- `__doc__`: the function's documentation string
+- `__module__`: the module where it was defined
+- `__wrapped__`: a reference to the original function
+
+`@wraps` does not execute the original function and does not change its business logic. It helps debugging, documentation tools, testing tools, and other decorators understand the wrapped function.
+
+Visual:
+
+```text
+without @wraps:
+add --------------------> wrapper
+                           name: "wrapper"
+                           doc: None
+
+with @wraps(function):
+add --------------------> wrapper around original add
+                           displayed name: "add"
+                           displayed doc: "Add two numbers."
+```
+
+For the rest of these notes, whenever a decorator defines a wrapper, use this beginner-safe pattern:
+
+```python
+from functools import wraps
+
+
+def decorator(function):
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        return function(*args, **kwargs)
+    return wrapper
+```
+
 ## Why do we need decorators?
 
 Imagine an application with many functions. Before each function runs, we may want to check login status, permissions, logging, timing, validation, or error handling. These tasks are **cross-cutting concerns**: they are needed around many functions, but they are not the main job of each function.
