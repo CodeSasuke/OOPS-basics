@@ -8,6 +8,14 @@ This roadmap organizes the `OOPS-basics` folder into three connected tracks:
 
 Every topic in this roadmap is taught with the repository convention: motivation first, the problem without the concept, a Socratic prediction, runnable code, observed output, visuals, common mistakes, and quick revision.
 
+## Folder learning plans
+
+Use the local plan when studying inside a topic folder:
+
+- [Core OOP learning plan](core_oop/learning_plan.md)
+- [Python functions learning plan](python_functions/learning_plan.md)
+- [OOP + Python features learning plan](oop_python_features/learning_plan.md)
+
 The order is beginner-first. Each topic should answer this sequence:
 
 ```text
