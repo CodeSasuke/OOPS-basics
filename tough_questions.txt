@@ -1,0 +1,261 @@
+TOUGH QUESTIONS: FUNCTIONS VS METHODS IN PYTHON
+================================================
+
+1. What is a function?
+Answer: A function is a reusable block of code defined independently, usually with
+the def keyword. It is called directly by its name and receives required data through
+explicit arguments.
+
+2. What is a method?
+Answer: A method is a function defined inside a class. It is associated with an
+object or class and is normally called through that object or class.
+
+3. Is every method a function? Is every function a method?
+Answer: A method starts as a function defined in a class, but it becomes a bound
+method when accessed through an object. A standalone function is not a method.
+
+4. Why does an instance method receive self automatically?
+Answer: When an instance method is accessed through an object, Python binds that
+object to the method and passes it as the first argument. self refers to that object.
+
+5. What happens when an instance method is called through the class?
+Answer:
+
+	class Student:
+		def display(self):
+			print("Student")
+
+	student = Student()
+	Student.display(student)  # works: self is supplied manually
+	Student.display()          # TypeError: self is missing
+
+6. Why does obj.method() work but Class.method() usually fail?
+Answer: obj.method() automatically supplies obj as self. Class.method() does not have
+an instance to supply, so the instance must be passed manually.
+
+7. Why is self not a reserved keyword?
+Answer: self is only a naming convention. Python uses the first parameter position,
+not the parameter name. However, self should always be used because it is standard
+and makes the code readable.
+
+8. Can a function become a method after being assigned to a class?
+Answer: Yes. Functions stored in a class are descriptors. When accessed through an
+instance, Python binds the instance to the function.
+
+	class Calculator:
+		pass
+
+	def add(self, x, y):
+		return x + y
+
+	Calculator.add = add
+	Calculator().add(2, 3)  # 5
+
+9. What is method binding?
+Answer: Method binding is the process of attaching an instance to a function stored
+in a class. The result is a bound method with self already supplied.
+
+10. What is the difference between a bound method and an unbound function?
+Answer: ClassName.method is the original function and needs an instance explicitly.
+object.method is a bound method and already remembers its object.
+
+11. What is the difference between Student.display and student.display?
+Answer: Student.display is the function stored on the class. student.display is a
+bound method whose self value is student.
+
+12. What happens when a method is defined without self?
+Answer:
+
+	class Test:
+		def show():
+			print("Hello")
+
+	Test().show()  # TypeError: show() takes 0 positional arguments but 1 was given
+
+	Python passes the object automatically, but show accepts no parameter.
+
+13. Can a method exist outside a class?
+Answer: No, not in the usual Python meaning. A function defined outside a class is a
+standalone function, although it can later be assigned to a class.
+
+14. Can a function access object attributes without receiving an object argument?
+Answer: No. A standalone function must receive the object explicitly, or access the
+object through some other external state. An instance method receives self normally.
+
+15. What is an instance method?
+Answer: An instance method receives self and operates on one particular object's
+data.
+
+	class Car:
+		def start(self):
+			return f"{self.make} started"
+
+16. What is a class method?
+Answer: A class method receives cls and operates on class-level data. It is declared
+with @classmethod and can be called through either the class or an instance.
+
+	class Employee:
+		company = "ABC"
+
+		@classmethod
+		def get_company(cls):
+			return cls.company
+
+17. What is a static method?
+Answer: A static method receives neither self nor cls. It is a function placed in a
+class because it is logically related to that class.
+
+	class Math:
+		@staticmethod
+		def add(x, y):
+			return x + y
+
+18. How is a static method different from an external function?
+Answer: Both receive arguments explicitly and do not get an object automatically.
+The static method is grouped inside a class to communicate conceptual ownership.
+
+19. When should you use a method instead of a standalone function?
+Answer: Use a method when the behavior belongs to an object or needs its state. Use a
+function when the behavior is general and independent of a particular object.
+
+20. What is method overriding?
+Answer: Method overriding occurs when a child class provides a new implementation
+of a method inherited from its parent.
+
+	class Animal:
+		def sound(self):
+			return "Some sound"
+
+	class Dog(Animal):
+		def sound(self):
+			return "Bark"
+
+21. What is the difference between overriding and redefining a function?
+Answer: Overriding replaces inherited behavior in a child class. Redefining a
+standalone function simply assigns a new function to the same name.
+
+22. What is method overloading, and does Python support it directly?
+Answer: Traditional overloading means multiple methods with the same name but
+different parameter lists. Python does not support this directly; the newest
+definition replaces earlier ones. Default arguments or *args are commonly used.
+
+23. How does inheritance affect method lookup?
+Answer: Python searches the object's class and then its parent classes according to
+the Method Resolution Order, or MRO.
+
+24. What is the MRO?
+Answer: MRO is the order Python uses to search classes for an attribute or method.
+It can be inspected with ClassName.mro() or ClassName.__mro__.
+
+25. Why can two objects call the same method but produce different results?
+Answer: The method code is shared, but self refers to a different object each time.
+Each object can therefore contain different instance attributes.
+
+26. What is duck typing?
+Answer: Duck typing means Python cares whether an object supports the required
+operation, rather than whether it belongs to a specific class.
+
+	def make_sound(animal):
+		animal.sound()
+
+	Any object with a sound method can be passed to make_sound.
+
+27. Can a function modify an object passed as an argument?
+Answer: Yes. If the function receives a mutable object, it can change that object's
+attributes or contents.
+
+	def rename(student, name):
+		student.name = name
+
+28. What is the difference between self.attribute and a local variable?
+Answer: self.attribute belongs to the object and remains available after the method
+returns. A local variable exists only during the method call.
+
+29. Why can a standalone function be more reusable than a method?
+Answer: A standalone function is not tied to a particular class or object. It can be
+used with different types as long as its required interface is supported.
+
+30. What is the difference between a method and a callable object?
+Answer: A method is behavior associated with an object or class. A callable object is
+any object that implements __call__, allowing it to be used like a function.
+
+31. How do decorators affect functions and methods?
+Answer: A decorator receives a function and returns a replacement function or object.
+For methods, the decorator can preserve, change, or remove normal argument binding.
+Use functools.wraps when writing wrappers to preserve function metadata.
+
+32. What does __get__ have to do with method binding?
+Answer: Functions implement the descriptor protocol. Their __get__ method returns a
+bound method when accessed through an instance and the original function when
+accessed through the class.
+
+33. Why is list.append different from my_list.append?
+Answer: list.append is the method function accessed through the class and requires a
+list explicitly. my_list.append is bound to my_list, so the list is supplied as self.
+
+34. What is a callable object?
+Answer: An object is callable when its class defines __call__. You can test this with
+callable(obj).
+
+	class Multiplier:
+		def __init__(self, value):
+			self.value = value
+
+		def __call__(self, number):
+			return self.value * number
+
+35. Predict the output and explain it:
+
+	class Demo:
+		def show(self):
+			print("method")
+
+	demo = Demo()
+	print(Demo.show)
+	print(demo.show)
+	Demo.show(demo)
+	demo.show()
+
+Answer: The first line displays a function representation, and the second displays a
+bound-method representation. The final two lines are:
+
+	method
+	method
+
+Demo.show requires demo to be passed manually. demo.show already has demo bound as
+self.
+
+36. What mechanism supplies self automatically?
+Answer: Python's descriptor protocol binds a function to an instance when the
+function is accessed through that instance. This creates a bound method.
+
+37. What is the difference between a class, an object, and an instance?
+Answer: A class is a blueprint. An object is a concrete entity created in memory.
+An instance is an object created from a particular class. In normal Python usage,
+object and instance usually refer to the same thing, but instance emphasizes the
+object's relationship with its class.
+
+	class Vehicle:
+		pass
+
+	my_car = Vehicle()
+
+	Vehicle                 # class
+	my_car                  # object and instance
+	isinstance(my_car, Vehicle)  # True
+
+38. Is a class itself an object in Python?
+Answer: Yes. Classes are objects created by the metaclass type. Therefore Vehicle is
+an instance of type, while my_car is an instance of Vehicle.
+
+39. Is a variable the object itself?
+Answer: No. A variable is a name or reference associated with an object. Multiple
+names can refer to the same object.
+
+	first = Vehicle()
+	second = first
+	first is second  # True
+
+40. Why does my_car.display_info() work in this example?
+Answer: Python finds display_info on the Vehicle class, binds my_car to its first
+parameter, and calls it approximately as Vehicle.display_info(my_car).
